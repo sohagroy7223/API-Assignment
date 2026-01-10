@@ -1,3 +1,17 @@
+function removeActiveClass() {
+  const activeButtons = document.getElementsByClassName("active");
+  for (const btn of activeButtons) {
+    btn.classList.remove("active");
+  }
+}
+
+function removeData() {
+  document.getElementById("remove").classList.add("hidden");
+}
+function addData() {
+  document.getElementById("add").classList.remove("hidden");
+}
+
 function showLearnBtn() {
   fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((response) => response.json())
@@ -7,7 +21,9 @@ function showLearnBtn() {
 function buttonData() {
   fetch("https://openapi.programming-hero.com/api/level/5")
     .then((res) => res.json())
-    .then((data) => loadBtnData(data.data));
+    .then((data) => {
+      loadBtnData(data.data);
+    });
 }
 
 function loadBtnData(id) {
@@ -16,7 +32,13 @@ function loadBtnData(id) {
   //   console.log(url);
   fetch(url)
     .then((res) => res.json())
-    .then((data) => displayBtnData(data.data));
+    .then((data) => {
+      removeActiveClass();
+      const clickBtn = document.getElementById(`btn-${id}`);
+      clickBtn.classList.add("active");
+
+      displayBtnData(data.data);
+    });
 }
 
 // {
@@ -38,6 +60,10 @@ function displayBtnData(details) {
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
   for (const detail of details) {
+    // console.log(detail);
+    //
+    removeData();
+
     // console.log(detail);
     const card = document.createElement("div");
     card.innerHTML = `
@@ -64,7 +90,7 @@ function displayLearnBtn(LearnButtons) {
     // console.log(button);
     const buttonDiv = document.createElement("div");
     buttonDiv.innerHTML = `
-    <button onclick="loadBtnData(${button.level_no})" class="btn btn-sm hover:bg-blue-700 border font-semibold border-[#422AD5] text-[#422AD5] hover:text-white">${button.lessonName}</button>
+    <button id="btn-${button.level_no}" onclick="loadBtnData(${button.level_no})" class="btn btn-sm hover:bg-blue-700 border font-semibold border-[#422AD5] text-[#422AD5] hover:text-white">${button.lessonName}</button>
     `;
     learnContainer.append(buttonDiv);
   }
