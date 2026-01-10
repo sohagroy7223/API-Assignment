@@ -17,7 +17,7 @@ function displayLearnBtn(LearnButtons) {
     // console.log(button);
     const buttonDiv = document.createElement("div");
     buttonDiv.innerHTML = `
-    <button class="btn btn-sm">${button.lessonName}</button>
+    <button class="btn btn-sm hover:bg-blue-700 border font-semibold border-[#422AD5] text-[#422AD5] hover:text-white">${button.lessonName}</button>
     `;
     learnContainer.append(buttonDiv);
   }
