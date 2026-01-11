@@ -5,13 +5,6 @@ function removeActiveClass() {
   }
 }
 
-function removeData() {
-  document.getElementById("remove").classList.add("hidden");
-}
-function addData() {
-  document.getElementById("add").classList.remove("hidden");
-}
-
 function showLearnBtn() {
   fetch("https://openapi.programming-hero.com/api/levels/all")
     .then((response) => response.json())
@@ -33,10 +26,6 @@ function loadBtnData(id) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      removeActiveClass();
-      const clickBtn = document.getElementById(`btn-${id}`);
-      clickBtn.classList.add("active");
-      removeData();
       displayBtnData(data.data);
     });
 }
@@ -56,37 +45,26 @@ function loadBtnData(id) {
 // }
 
 function displayBtnData(details) {
-  //   console.log(details);
+  // console.log(details);
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
-
-  if (details == "") {
-    document.getElementById("no-data").classList.remove("hidden");
-    detailsCard.innerHTML = "";
-    return;
-  } else {
-    document.getElementById("no-data").classList.add("hidden");
-  }
-
   for (const detail of details) {
-    console.log(detail);
-    //
-
     // console.log(detail);
+
     const card = document.createElement("div");
     card.innerHTML = `
-        <div class=" rounded-lg border-2 bg-white ">
-            <div class="card-body items-center text-center">
-                <h2 class="card-title text-black">${detail.word}</h2>
-                <p class="text-black">Meaning /Pronounciation</p>
-                <h2 class="text-2xl text-black">${detail.meaning}</h2>
-                <div class="flex justify-between w-11/12 cursor-pointer">
-                    <i class="fa-solid fa-circle-info "></i>
-                    <i class="fa-solid fa-volume-high"></i>
+            <div class=" rounded-lg border-2 bg-white ">
+                <div class="card-body items-center text-center">
+                    <h2 class="card-title text-black">${detail.word}</h2>
+                    <p class="text-black">Meaning /Pronounciation</p>
+                    <h2 class="text-2xl text-black">${detail.meaning}</h2>
+                    <div class="flex justify-between w-11/12 cursor-pointer">
+                        <i class="fa-solid fa-circle-info "></i>
+                        <i class="fa-solid fa-volume-high"></i>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
     detailsCard.append(card);
   }
 }
