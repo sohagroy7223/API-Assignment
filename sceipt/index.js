@@ -36,7 +36,7 @@ function loadBtnData(id) {
       removeActiveClass();
       const clickBtn = document.getElementById(`btn-${id}`);
       clickBtn.classList.add("active");
-
+      removeData();
       displayBtnData(data.data);
     });
 }
@@ -59,10 +59,18 @@ function displayBtnData(details) {
   //   console.log(details);
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
+
+  if (details == "") {
+    document.getElementById("no-data").classList.remove("hidden");
+    detailsCard.innerHTML = "";
+    return;
+  } else {
+    document.getElementById("no-data").classList.add("hidden");
+  }
+
   for (const detail of details) {
-    // console.log(detail);
+    console.log(detail);
     //
-    removeData();
 
     // console.log(detail);
     const card = document.createElement("div");
