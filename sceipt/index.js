@@ -1,3 +1,11 @@
+function wordDetails(id) {
+  const url = `https://openapi.programming-hero.com/api/word/${id}`;
+  // console.log(url);
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayWordDetails(data.data));
+}
+
 function hiddenClass() {
   document.getElementById("remove").classList.add("hidden");
 }
@@ -8,9 +16,6 @@ function removeActiveClass() {
     btn.classList.remove("active");
   }
 }
-// function removeData() {
-//   document.getElementById("remove").classList.add("hidden");
-// }
 
 function showLearnBtn() {
   fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -29,11 +34,11 @@ function buttonData() {
 function loadBtnData(id) {
   //   console.log(id);
   const url = `https://openapi.programming-hero.com/api/level/${id}`;
+  removeActiveClass();
   //   console.log(url);
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      removeActiveClass();
       const clickBtn = document.getElementById(`btn-${id}`);
       if (clickBtn) {
         clickBtn.classList.add("active");
@@ -56,19 +61,60 @@ function loadBtnData(id) {
 //     "pronunciation": "ডিলিজেন্ট"
 // }
 
+// {
+//     "word": "Eager",
+//     "meaning": "আগ্রহী",
+//     "pronunciation": "ইগার",
+//     "level": 1,
+//     "sentence": "The kids were eager to open their gifts.",
+//     "points": 1,
+//     "partsOfSpeech": "adjective",
+//     "synonyms": [
+//         "enthusiastic",
+//         "excited",
+//         "keen"
+//     ],
+//     "id": 5
+// }
+
+function displayWordDetails(detailsId) {
+  // console.log(detailsId);
+  document.getElementById("card_details").showModal();
+  const detailContainer = document.getElementById("card-container");
+  detailContainer.innerHTML = `
+    <div class="card card-dash bg-base-100 w-auto h-auto">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold">${detailsId.word}  (${detailsId.pronunciation})</h2>
+      <br>
+      <h2 class="card-title ">Meaning</h2>
+      <h2 class="card-title ">${detailsId.meaning}</h2>
+       <br>
+      <h2 class="card-title ">Example</h2>
+      <h2 class="card-title ">${detailsId.sentence}</h2>
+      <br>
+      <h2 class="card-title ">সমার্থক শব্দ গুলো</h2>
+      <h2 class="card-title ">${detailsId.synonyms}</h2>
+      
+    </div>
+  </div>
+    
+    `;
+}
+
 function displayBtnData(details) {
   // console.log(details);
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
-  if (details == "") {
+  if (details.length === 0) {
     document.getElementById("no-data").classList.remove("hidden");
     return;
   } else {
     document.getElementById("no-data").classList.add("hidden");
   }
   for (const detail of details) {
-    // console.log(detail);
     hiddenClass();
+
+    // console.log(detail);
     const card = document.createElement("div");
     card.innerHTML = `
             <div class=" rounded-lg border-2 bg-white ">
@@ -77,12 +123,18 @@ function displayBtnData(details) {
                     <p class="text-black">Meaning /Pronounciation</p>
                     <h2 class="text-2xl text-black">${detail.meaning}</h2>
                     <div class="flex justify-between w-11/12 cursor-pointer">
-                        <i class="fa-solid fa-circle-info "></i>
+
+                  
+                      <div>
+                        <i id="btn-${detail.level}" onclick="wordDetails(${detail.id})" class="fa-solid fa-circle-info "></i>
+                       </div>
+                        
                         <i class="fa-solid fa-volume-high"></i>
                     </div>
                 </div>
             </div>
         `;
+
     detailsCard.append(card);
   }
 }
@@ -102,3 +154,4 @@ function displayLearnBtn(LearnButtons) {
 
 showLearnBtn();
 buttonData();
+wordDetails();

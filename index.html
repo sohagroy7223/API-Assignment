@@ -66,7 +66,9 @@
 
         </div>
         <div id="allBtnDetail" class="grid grid-cols-3 col-span-full gap-3">
+            <div id="details-container">
 
+            </div>
         </div>
 
         <div id="remove" class="bg-gray-200 rounded-lg py-14 mt-5 ">
@@ -138,6 +140,22 @@
             </div>
         </div>
     </section>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="card_details.showModal()">open modal</button> -->
+    <dialog id="card_details" class="modal">
+        <div class="modal-box">
+            <div id="card-container">
+
+            </div>
+            <div class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
 
     <footer class="footer sm:footer-horizontal bg-neutral flex justify-between items-center text-neutral-content p-10">
         <aside>
