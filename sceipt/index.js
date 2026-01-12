@@ -1,9 +1,16 @@
+function hiddenClass() {
+  document.getElementById("remove").classList.add("hidden");
+}
+
 function removeActiveClass() {
   const activeButtons = document.getElementsByClassName("active");
   for (const btn of activeButtons) {
     btn.classList.remove("active");
   }
 }
+// function removeData() {
+//   document.getElementById("remove").classList.add("hidden");
+// }
 
 function showLearnBtn() {
   fetch("https://openapi.programming-hero.com/api/levels/all")
@@ -26,6 +33,11 @@ function loadBtnData(id) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+      removeActiveClass();
+      const clickBtn = document.getElementById(`btn-${id}`);
+      if (clickBtn) {
+        clickBtn.classList.add("active");
+      }
       displayBtnData(data.data);
     });
 }
@@ -48,9 +60,15 @@ function displayBtnData(details) {
   // console.log(details);
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
+  if (details == "") {
+    document.getElementById("no-data").classList.remove("hidden");
+    return;
+  } else {
+    document.getElementById("no-data").classList.add("hidden");
+  }
   for (const detail of details) {
     // console.log(detail);
-
+    hiddenClass();
     const card = document.createElement("div");
     card.innerHTML = `
             <div class=" rounded-lg border-2 bg-white ">

@@ -11,7 +11,10 @@
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/4bed362189.js" crossorigin="anonymous"></script>
     <style>
-
+        .active {
+            background-color: blue;
+            color: white;
+        }
     </style>
 </head>
 
@@ -69,6 +72,11 @@
         <div id="remove" class="bg-gray-200 rounded-lg py-14 mt-5 ">
             <p class="text-gray-500 text-center text-sm py-3">আপনি এখনো কোন Lesson Select করেন নe</p>
             <h2 class="text-xl text-center ">একটি Lesson Select করুন।</h2>
+        </div>
+        <div id="no-data" class=" bg-gray-200 rounded-lg py-14 mt-5 hidden">
+            <img class="mx-auto" src="./assets/alert-error.png" alt="">
+            <p class="text-gray-500 text-center text-sm py-3">এই Lesson এ এখনো কোন Vocabulary যুক্ত করা হয়নি।</p>
+            <h2 class="text-xl text-center ">নেক্সট Lesson এ যান</h2>
         </div>
 
     </section>
