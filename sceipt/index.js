@@ -82,23 +82,27 @@ function displayWordDetails(detailsId) {
   document.getElementById("card_details").showModal();
   const detailContainer = document.getElementById("card-container");
   detailContainer.innerHTML = `
-    <div class="card card-dash bg-base-100 w-auto h-auto">
-    <div class="card-body">
-      <h2 class="card-title text-2xl font-bold">${detailsId.word}  (${detailsId.pronunciation})</h2>
-      <br>
-      <h2 class="card-title ">Meaning</h2>
-      <h2 class="card-title ">${detailsId.meaning}</h2>
-       <br>
-      <h2 class="card-title ">Example</h2>
-      <h2 class="card-title ">${detailsId.sentence}</h2>
-      <br>
-      <h2 class="card-title ">সমার্থক শব্দ গুলো</h2>
-      <h2 class="card-title ">${detailsId.synonyms}</h2>
-      
+  <div class="">
+    <div class="card-body space-y-2">
+        <div>
+          <h2 class="card-title text-2xl font-bold">${detailsId.word}  (${detailsId.pronunciation})</h2>
+        </div>
+        <div>
+          <h2 class="card-title ">Meaning</h2>
+          <h2 class="card-title ">${detailsId.meaning}</h2>
+        </div>
+        <div>
+          <h2 class="card-title ">Example</h2>
+          <h2 class="card-title ">${detailsId.sentence}</h2>
+        </div>
+        <div>
+          <h2 class="card-title ">সমার্থক শব্দ গুলো</h2>
+          <button class="btn">${detailsId.synonyms}</button>
+        </div>
     </div>
   </div>
-    
-    `;
+  
+  `;
 }
 
 function displayBtnData(details) {
