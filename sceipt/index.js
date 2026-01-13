@@ -82,30 +82,29 @@ function displayWordDetails(detailsId) {
   document.getElementById("card_details").showModal();
   const detailContainer = document.getElementById("card-container");
   detailContainer.innerHTML = `
-  <div class="">
-  <div class="card-body space-y-2">
-  <div>
-  <h2 class="card-title text-2xl font-bold">${detailsId.word}  (${detailsId.pronunciation})</h2>
-  </div>
-  <div>
-  <h2 class="card-title ">Meaning</h2>
-  <h2 class="card-title ">${detailsId.meaning}</h2>
-  </div>
-  <div>
-  <h2 class="card-title ">Example</h2>
-  <h2 class="card-title ">${detailsId.sentence}</h2>
-  </div>
-  <div>
-  <h2 class="card-title ">সমার্থক শব্দ গুলো</h2>
-  <button class="btn">${detailsId.synonyms}</button>
-        </div>
-    </div>
-    </div>
-    `;
+<div class="card-body space-y-2">
+   <div>
+      <h2 class="card-title text-2xl font-bold">${detailsId.word}  (${detailsId.pronunciation})</h2>
+   </div>
+   <div>
+      <h2 class="card-title ">Meaning</h2>
+      <h2 class="card-title ">${detailsId.meaning}</h2>
+   </div>
+   <div>
+      <h2 class="card-title ">Example</h2>
+      <h2 class="card-title ">${detailsId.sentence}</h2>
+   </div>
+   <div>
+      <h2 class="card-title ">সমার্থক শব্দ গুলো</h2>
+      <button class="btn">${detailsId.synonyms}</button>
+   </div>
+</div>
+`;
 }
 
 function displayBtnData(details) {
   // console.log(details);
+  hiddenClass();
   const detailsCard = document.getElementById("allBtnDetail");
   detailsCard.innerHTML = "";
   if (details.length === 0) {
@@ -115,25 +114,19 @@ function displayBtnData(details) {
     document.getElementById("no-data").classList.add("hidden");
   }
   for (const detail of details) {
-    hiddenClass();
-
     // console.log(detail);
     const card = document.createElement("div");
     card.innerHTML = `
             <div class=" rounded-lg border-2 bg-white ">
                 <div class="card-body items-center text-center">
-                    <h2 class="card-title text-black">${detail.word}</h2>
-                    <p class="text-black">Meaning /Pronounciation</p>
-                    <h2 class="text-2xl text-black">${detail.meaning}</h2>
-                    <div class="flex justify-between w-11/12 cursor-pointer">
+                      <h2 class="card-title text-black">${detail.word}</h2>
+                      <p class="text-black">Meaning /Pronounciation</p>
+                      <h2 class="text-2xl text-black">${detail.meaning}</h2>
 
-                  
-                      <div>
+                      <div class="flex justify-between w-11/12 cursor-pointer">
                         <i id="btn-${detail.level}" onclick="wordDetails(${detail.id})" class="fa-solid fa-circle-info "></i>
-                       </div>
-                        
                         <i class="fa-solid fa-volume-high"></i>
-                    </div>
+                      </div>
                 </div>
             </div>
         `;
